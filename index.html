@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offside Store — Premium Sports Jerseys India</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #05050a;
+  --dark: #0a0a12;
+  --surface: #111118;
+  --card: #16161f;
+  --border: #1f1f2e;
+  --border2: #2a2a3d;
+  --white: #f0f0f5;
+  --muted: #555568;
+  --muted2: #7777a0;
+  --lime: #c8ff00;
+  --lime-dim: rgba(200,255,0,0.08);
+  --red: #ff2d2d;
+  --red-dim: rgba(255,45,45,0.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--lime);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--lime);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.25s, height 0.25s, opacity 0.2s;
+  opacity: 0.5;
+}
+
+/* ===================== NOISE TEXTURE ===================== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.4;
+}
+
+/* ===================== ANNOUNCEMENT BAR ===================== */
+.announce {
+  background: var(--lime);
+  color: var(--black);
+  text-align: center;
+  padding: 9px 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.announce-scroll {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 30s linear infinite;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===================== NAVBAR ===================== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(5,5,10,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  position: relative;
+}
+
+.nav-logo span {
+  color: var(--lime);
+}
+
+.nav-logo::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--lime);
+  transition: width 0.3s;
+}
+
+.nav-logo:hover::after { width: 100%; }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--lime);
+  background: var(--lime-dim);
+}
+
+.nav-links a.active {
+  color: var(--lime);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-search {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 14px;
+  color: var(--muted2);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  outline: none;
+  width: 180px;
+  transition: border-color 0.2s, width 0.3s;
+}
+
+.nav-search:focus {
+  border-color: var(--lime);
+  color: var(--white);
+  width: 220px;
+}
+
+.nav-search::placeholder { color: var(--muted); }
+
+.cart-btn {
+  background: var(--lime);
+  color: var(--black);
+  border: none;
+  border-radius: 6px;
+  padding: 9px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(200,255,0,0.25);
+}
+
+/* ===================== HERO ===================== */
+.hero {
+  position: relative;
+  min-height: calc(100vh - 100px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 60px 80px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--lime-dim);
+  border: 1px solid rgba(200,255,0,0.2);
+  color: var(--lime);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 28px;
+  width: fit-content;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(70px, 9vw, 120px);
+  line-height: 0.88;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--white);
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--lime);
+  display: block;
+}
+
+.hero h1 .outline {
+  -webkit-text-stroke: 1.5px var(--white);
+  color: transparent;
+}
+
+.hero-sub {
+  margin-top: 24px;
+  color: var(--muted2);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 380px;
+  font-weight: 300;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.btn-primary {
+  background: var(--lime);
+  color: var(--black);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(200,255,0,0.3);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid var(--border2);
+  cursor: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 56px;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.stat {}
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  color: var(--white);
+  line-height: 1;
+}
+
+.stat-num span { color: var(--lime); }
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-img-container {
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+}
+
+/* Abstract football pitch lines */
+.hero-img-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 70% 50%, rgba(200,255,0,0.04) 0%, transparent 60%),
+    linear-gradient(135deg, var(--dark) 0%, var(--surface) 100%);
+  z-index: 1;
+}
+
+.hero-jersey-showcase {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Jersey cards floating */
+.jersey-float {
+  position: absolute;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.jersey-main {
+  width: 280px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.jersey-sm {
+  width: 150px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.jersey-main { left: 50%; top: 50%; transform: translate(-55%, -50%); animation: floatMain 4s ease-in-out infinite; }
+.jersey-sm:nth-child(2) { right: 8%; top: 15%; animation: floatA 5s 0.5s ease-in-out infinite; }
+.jersey-sm:nth-child(3) { left: 8%; bottom: 12%; animation: floatB 4.5s 1s ease-in-out infinite; }
+
+@keyframes floatMain { 0%,100%{transform:translate(-55%,-50%) translateY(0)} 50%{transform:translate(-55%,-50%) translateY(-12px)} }
+@keyframes floatA { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+.jersey-emoji { font-size: 64px; line-height: 1; margin-bottom: 10px; }
+.jersey-sm .jersey-emoji { font-size: 40px; }
+
+.jersey-tag {
+  background: var(--lime);
+  color: var(--black);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 3px;
+  margin-top: 6px;
+}
+
+.jersey-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--white);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.jersey-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  color: var(--muted2);
+  margin-top: 4px;
+}
+
+/* Price badge on main card */
+.price-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Pitch lines decoration */
+.pitch-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.pitch-lines::before, .pitch-lines::after {
+  content: '';
+  position: absolute;
+  border: 1px solid rgba(200,255,0,0.04);
+}
+
+.pitch-lines::before {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pitch-lines::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  background: rgba(200,255,0,0.04);
+  border: none;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================== MARQUEE BAND ===================== */
+.marquee-band {
+  background: var(--lime);
+  padding: 14px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-track span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--black);
+  padding: 0 30px;
+}
+
+.marquee-track span.dot {
+  color: rgba(0,0,0,0.3);
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===================== SECTION COMMON ===================== */
+section { padding: 100px 80px; }
+
+.section-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--lime);
+}
+
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(40px, 5vw, 64px);
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+}
+
+.section-title .dim { color: var(--muted); }
+
+/* ===================== CATEGORIES ===================== */
+.categories { background: var(--dark); }
+
+.categories-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.view-all {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border2);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.view-all:hover { color: var(--lime); border-color: var(--lime); }
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.cat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  position: relative;
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: transform 0.3s, border-color 0.3s;
+  cursor: none;
+}
+
+.cat-card:hover { transform: translateY(-6px); border-color: var(--lime); }
+
+.cat-card-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  transition: transform 0.4s;
+}
+
+.cat-card:hover .cat-card-bg { transform: scale(1.08); }
+
+.cat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
+}
+
+.cat-card-body {
+  position: relative;
+  z-index: 2;
+  padding: 16px;
+}
+
+.cat-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.cat-count {
+  font-size: 11px;
+  color: var(--muted2);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.cat-card.featured {
+  grid-column: span 2;
+  aspect-ratio: unset;
+}
+
+/* ===================== FEATURED PRODUCTS ===================== */
+.products { background: var(--black); }
+
+.products-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: none;
+  transition: border-color 0.25s, transform 0.25s;
+  position: relative;
+}
+
+.product-card:hover { border-color: var(--lime); transform: translateY(-4px); }
+
+.product-img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 90px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.product-card:hover .product-img { background: rgba(200,255,0,0.04); }
+
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.badge-new { background: var(--lime); color: var(--black); }
+.badge-hot { background: var(--red); color: var(--white); }
+.badge-pre { background: var(--surface); color: var(--muted2); border: 1px solid var(--border2); }
+
+.product-quick {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  background: var(--lime);
+  color: var(--black);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 5px;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.product-card:hover .product-quick {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.product-body { padding: 16px; }
+
+.product-sport {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.product-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.product-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--white);
+}
+
+.product-price .old {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: line-through;
+  margin-left: 6px;
+  font-weight: 400;
+}
+
+.product-sizes {
+  display: flex;
+  gap: 4px;
+}
+
+.size-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--muted2);
+  letter-spacing: 0;
+}
+
+/* ===================== PRE-ORDER BANNER ===================== */
+.prebooking {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.prebooking::before {
+  content: 'PRE';
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 280px;
+  color: rgba(200,255,0,0.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.prebooking-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--red-dim);
+  border: 1px solid rgba(255,45,45,0.2);
+  color: var(--red);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.prebooking h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(50px, 5vw, 72px);
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.prebooking h2 span { color: var(--lime); }
+
+.prebooking-desc {
+  color: var(--muted2);
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 36px;
+  max-width: 400px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--lime-dim);
+  border: 1px solid rgba(200,255,0,0.2);
+  color: var(--lime);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-content {}
+.step-title { font-weight: 700; font-size: 14px; color: var(--white); margin-bottom: 3px; }
+.step-desc { font-size: 13px; color: var(--muted2); line-height: 1.5; }
+
+/* ===================== TEAMS GRID ===================== */
+.teams { background: var(--dark); }
+
+.teams-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.team-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.team-card:hover {
+  border-color: var(--lime);
+  background: var(--lime-dim);
+  transform: translateY(-4px);
+}
+
+.team-emoji { font-size: 36px; }
+.team-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.team-card:hover .team-name { color: var(--lime); }
+
+/* ===================== WHY US ===================== */
+.whyus {
+  background: var(--black);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0;
+}
+
+.whyus-left {
+  padding: 100px 80px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.whyus-right {
+  padding: 100px 80px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.feature {}
+.feature-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.feature-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.feature-desc {
+  font-size: 13px;
+  color: var(--muted2);
+  line-height: 1.6;
+}
+
+.testimonials { margin-top: 0; }
+
+.testi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.testi-stars {
+  color: var(--lime);
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.testi-text {
+  font-size: 14px;
+  color: var(--muted2);
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.testi-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.testi-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.testi-city {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ===================== INSTAGRAM STRIP ===================== */
+.insta-strip {
+  background: var(--dark);
+  padding: 80px;
+  text-align: center;
+}
+
+.insta-strip h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 48px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.insta-strip h3 span { color: var(--lime); }
+
+.insta-handle {
+  color: var(--muted2);
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.insta-post {
+  aspect-ratio: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  transition: opacity 0.2s, transform 0.2s;
+  cursor: none;
+}
+
+.insta-post:hover { opacity: 0.8; transform: scale(0.97); }
+
+/* ===================== NEWSLETTER ===================== */
+.newsletter {
+  background: var(--lime);
+  padding: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.newsletter-left {}
+.newsletter h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(36px, 4vw, 56px);
+  text-transform: uppercase;
+  color: var(--black);
+  line-height: 0.95;
+}
+
+.newsletter-sub {
+  color: rgba(0,0,0,0.55);
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  max-width: 480px;
+}
+
+.newsletter-input {
+  flex: 1;
+  background: rgba(0,0,0,0.12);
+  border: 1.5px solid rgba(0,0,0,0.2);
+  border-radius: 7px;
+  padding: 14px 20px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.newsletter-input::placeholder { color: rgba(0,0,0,0.4); }
+.newsletter-input:focus { border-color: rgba(0,0,0,0.5); }
+
+.newsletter-btn {
+  background: var(--black);
+  color: var(--lime);
+  border: none;
+  border-radius: 7px;
+  padding: 14px 28px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: none;
+  white-space: nowrap;
+  transition: transform 0.15s;
+}
+
+.newsletter-btn:hover { transform: scale(1.03); }
+
+/* ===================== FOOTER ===================== */
+footer {
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  padding: 80px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-brand {}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.footer-logo span { color: var(--lime); }
+
+.footer-tagline {
+  color: var(--muted2);
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 240px;
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+}
+
+.social-link {
+  width: 38px;
+  height: 38px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.social-link:hover { border-color: var(--lime); background: var(--lime-dim); }
+
+.footer-col-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a {
+  color: var(--muted2);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+  cursor: none;
+}
+
+.footer-links a:hover { color: var(--lime); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer-payments {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.payment-pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--muted2);
+  text-transform: uppercase;
+}
+
+/* ===================== WHATSAPP FLOAT ===================== */
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  background: #25d366;
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.35);
+  text-decoration: none;
+  cursor: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: waPop 0.5s 1.5s ease both;
+}
+
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 32px rgba(37,211,102,0.5);
+}
+
+@keyframes waPop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 80px 40px; }
+  section { padding: 80px 40px; }
+  .cat-grid { grid-template-columns: repeat(3, 1fr); }
+  .cat-card.featured { grid-column: span 1; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid { grid-template-columns: repeat(4, 1fr); }
+  .prebooking { grid-template-columns: 1fr; gap: 40px; padding: 60px 40px; }
+  .whyus { grid-template-columns: 1fr; }
+  .whyus-left, .whyus-right { padding: 60px 40px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .newsletter { flex-direction: column; padding: 60px 40px; }
+  .newsletter-form { max-width: 100%; width: 100%; }
+  .insta-grid { grid-template-columns: repeat(3, 1fr); }
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  footer { padding: 60px 40px; }
+  .insta-strip { padding: 60px 40px; }
+}
+
+/* ===================== MOBILE ===================== */
+@media (max-width: 600px) {
+  /* Nav */
+  nav { padding: 0 16px; height: 56px; }
+  .nav-search { display: none; }
+  .nav-logo { font-size: 22px; }
+  .cart-btn { padding: 8px 14px; font-size: 12px; }
+
+  /* Hero */
+  .hero-left { padding: 48px 20px 56px; }
+  .hero h1 { font-size: 64px; }
+  .hero-sub { font-size: 14px; margin-top: 16px; }
+  .hero-actions { flex-direction: column; gap: 10px; margin-top: 28px; }
+  .btn-primary, .btn-ghost { text-align: center; padding: 14px 20px; font-size: 13px; }
+  .hero-stats { gap: 24px; margin-top: 40px; flex-wrap: wrap; }
+  .stat-num { font-size: 28px; }
+  .stat-label { font-size: 10px; }
+
+  /* Sections */
+  section { padding: 56px 20px; }
+  .section-title { font-size: 36px; }
+
+  /* Categories */
+  .categories { padding: 56px 20px; }
+  .categories-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
+  .cat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cat-card.featured { grid-column: 1 / -1; aspect-ratio: 16/7; }
+  .cat-card { aspect-ratio: 3/4; border-radius: 10px; }
+  .cat-card-bg { font-size: 54px; }
+  .cat-name { font-size: 14px; }
+  .cat-count { font-size: 10px; }
+
+  /* Products */
+  .products { padding: 56px 20px; }
+  .products-header { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 24px; }
+  .product-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .product-img { font-size: 60px; }
+  .product-name { font-size: 14px; }
+  .product-body { padding: 12px; }
+  .product-price { font-size: 15px; }
+  .product-price .old { font-size: 11px; }
+  .product-sport { font-size: 9px; }
+  .product-sizes { gap: 3px; }
+  .size-dot { width: 20px; height: 20px; font-size: 7px; }
+  .product-quick { display: none; }
+
+  /* Pre-order */
+  .prebooking { padding: 56px 20px; gap: 32px; }
+  .prebooking h2 { font-size: 44px; }
+  .prebooking::before { display: none; }
+  .step { gap: 12px; }
+  .step-title { font-size: 13px; }
+  .step-desc { font-size: 12px; }
+
+  /* Teams */
+  .teams { padding: 56px 20px; }
+  .teams-header { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 24px; }
+  .team-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .team-card { padding: 14px 10px; border-radius: 8px; }
+  .team-emoji { font-size: 28px; }
+  .team-name { font-size: 10px; }
+
+  /* Why Us */
+  .whyus-left, .whyus-right { padding: 56px 20px; }
+  .features { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+  .testi-card { padding: 18px; }
+  .testi-text { font-size: 13px; }
+
+  /* Instagram */
+  .insta-strip { padding: 56px 20px; }
+  .insta-strip h3 { font-size: 32px; }
+  .insta-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .insta-post { font-size: 36px; border-radius: 6px; }
+  .insta-handle { font-size: 12px; margin-bottom: 24px; }
+
+  /* Newsletter */
+  .newsletter { padding: 48px 20px; gap: 28px; }
+  .newsletter h3 { font-size: 36px; }
+  .newsletter-form { flex-direction: column; gap: 10px; }
+  .newsletter-btn { padding: 14px; text-align: center; }
+
+  /* Footer */
+  footer { padding: 48px 20px 32px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-payments { flex-wrap: wrap; justify-content: center; }
+  .footer-tagline { max-width: 100%; }
+
+  /* Misc */
+  .wa-float { width: 48px; height: 48px; font-size: 22px; bottom: 20px; right: 20px; }
+
+  /* Mobile hamburger menu */
+  .mobile-menu-btn {
+    display: flex !important;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: var(--white);
+    font-size: 18px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Mobile nav drawer */
+  .mobile-nav {
+    display: flex !important;
+  }
+}
+
+/* Mobile nav elements hidden on desktop */
+.mobile-menu-btn { display: none; }
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,10,0.98);
+  z-index: 2000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  backdrop-filter: blur(20px);
+}
+
+.mobile-nav.open { display: flex; }
+
+.mobile-nav a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 36px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  padding: 10px 0;
+  transition: color 0.2s;
+}
+
+.mobile-nav a:hover { color: var(--lime); }
+
+.mobile-nav-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 20px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  <div class="announce-scroll">
+    <span>🔥 New 25/26 Jerseys Just Dropped</span>
+    <span class="dot">◆</span>
+    <span>Pre-Order Now — 4 to 5 Week Delivery</span>
+    <span class="dot">◆</span>
+    <span>Free Shipping on Orders Above ₹2,000</span>
+    <span class="dot">◆</span>
+    <span>F1, NBA, Football, Cleats & More</span>
+    <span class="dot">◆</span>
+    <span>Custom Name & Number Printing Available</span>
+    <span class="dot">◆</span>
+    <span>🔥 New 25/26 Jerseys Just Dropped</span>
+    <span class="dot">◆</span>
+    <span>Pre-Order Now — 4 to 5 Week Delivery</span>
+    <span class="dot">◆</span>
+    <span>Free Shipping on Orders Above ₹2,000</span>
+    <span class="dot">◆</span>
+    <span>F1, NBA, Football, Cleats & More</span>
+    <span class="dot">◆</span>
+    <span>Custom Name & Number Printing Available</span>
+    <span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">Offside<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#">Football</a></li>
+    <li><a href="#">F1</a></li>
+    <li><a href="#">NBA</a></li>
+    <li><a href="#">Retro</a></li>
+    <li><a href="#">Cleats</a></li>
+    <li><a href="#">Jackets</a></li>
+    <li><a href="#">How to Order</a></li>
+  </ul>
+  <div class="nav-right">
+    <input class="nav-search" type="text" placeholder="Search jerseys...">
+    <button class="cart-btn">🛒 Cart <span style="background:var(--black);color:var(--lime);padding:1px 7px;border-radius:10px;font-size:11px;">0</span></button>
+    <button class="mobile-menu-btn" onclick="document.getElementById('mobileNav').classList.add('open')">☰</button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+  <a href="#" onclick="document.getElementById('mobileNav').classList.remove('open')">Home</a>
+  <a href="#" onclick="document.getElementById('mobileNav').classList.remove('open')">Football</a>
+  <a href="#" onclick="document.getElementById('mobileNav').classList.remove('open')">F1</a>
+  <a href="#" onclick="document.getElementById('mobileNav').classList.remove('open')">NBA</a>
+  <a href="#" onclick="document.getElementById('mobileNav').classList.remove('open')">Retro</a>
+  <a href="#" onclick="document.getElementById('mobileNav').classList.remove('open')">Cleats</a>
+  <a href="#" onclick="document.getElementById('mobileNav').classList.remove('open')">Jackets</a>
+  <a href="#" onclick="document.getElementById('mobileNav').classList.remove('open')">How to Order</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-tag">New Season Drop</div>
+    <h1>
+      <span class="outline">Wear</span>
+      <em>The Game</em>
+      Live It
+    </h1>
+    <p class="hero-sub">Premium sports jerseys — Football, F1, NBA, Cleats & more. Custom printed. Pre-ordered from the source. Delivered to your door.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Shop Now</a>
+      <a href="#" class="btn-ghost">How to Order →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">500<span>+</span></div>
+        <div class="stat-label">Orders Delivered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">50<span>+</span></div>
+        <div class="stat-label">Teams Available</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.9<span>★</span></div>
+        <div class="stat-label">Customer Rating</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="pitch-lines"></div>
+    <div class="hero-img-container"></div>
+    <div class="hero-jersey-showcase">
+      <div class="jersey-float jersey-main">
+        <div class="price-badge">PRE-ORDER</div>
+        <div class="jersey-emoji">👕</div>
+        <div class="jersey-name">Real Madrid<br>Home 25/26</div>
+        <div class="jersey-tag">From ₹1,399</div>
+        <div class="jersey-price">Fan / Player Version</div>
+      </div>
+      <div class="jersey-float jersey-sm">
+        <div class="jersey-emoji">🏎️</div>
+        <div class="jersey-name">Ferrari F1</div>
+        <div class="jersey-tag">₹1,699</div>
+      </div>
+      <div class="jersey-float jersey-sm">
+        <div class="jersey-emoji">🏀</div>
+        <div class="jersey-name">Lakers #23</div>
+        <div class="jersey-tag">₹1,499</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span>Football Jerseys</span><span class="dot">◆</span>
+    <span>F1 Racing Gear</span><span class="dot">◆</span>
+    <span>NBA Jerseys</span><span class="dot">◆</span>
+    <span>Retro Classics</span><span class="dot">◆</span>
+    <span>Custom Printing</span><span class="dot">◆</span>
+    <span>Premium Quality</span><span class="dot">◆</span>
+    <span>Pan India Delivery</span><span class="dot">◆</span>
+    <span>Pre-Order Now</span><span class="dot">◆</span>
+    <span>Football Jerseys</span><span class="dot">◆</span>
+    <span>F1 Racing Gear</span><span class="dot">◆</span>
+    <span>NBA Jerseys</span><span class="dot">◆</span>
+    <span>Retro Classics</span><span class="dot">◆</span>
+    <span>Custom Printing</span><span class="dot">◆</span>
+    <span>Premium Quality</span><span class="dot">◆</span>
+    <span>Pan India Delivery</span><span class="dot">◆</span>
+    <span>Pre-Order Now</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <div class="categories-header">
+    <div>
+      <div class="section-eyebrow">Collections</div>
+      <div class="section-title">Shop By <span class="dim">Sport</span></div>
+    </div>
+    <a href="#" class="view-all">View All Collections →</a>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card featured" style="background: linear-gradient(135deg, #1a0500, #0f0a00);">
+      <div class="cat-card-bg" style="font-size:130px; opacity:0.3;">⚽</div>
+      <div class="cat-card-body">
+        <div class="cat-name">Football Jerseys</div>
+        <div class="cat-count">EPL · La Liga · UCL · Serie A · National Teams</div>
+      </div>
+    </div>
+    <div class="cat-card" style="background: #0a0010;">
+      <div class="cat-card-bg">🏎️</div>
+      <div class="cat-card-body">
+        <div class="cat-name">F1 Racing</div>
+        <div class="cat-count">Ferrari · RedBull · Mercedes</div>
+      </div>
+    </div>
+    <div class="cat-card" style="background: #00050f;">
+      <div class="cat-card-bg">🏀</div>
+      <div class="cat-card-body">
+        <div class="cat-name">NBA</div>
+        <div class="cat-count">Lakers · Bulls · Warriors</div>
+      </div>
+    </div>
+    <div class="cat-card" style="background: #080010;">
+      <div class="cat-card-bg">👟</div>
+      <div class="cat-card-body">
+        <div class="cat-name">Cleats</div>
+        <div class="cat-count">Nike · Adidas · Puma</div>
+      </div>
+    </div>
+    <div class="cat-card" style="background: #040f00;">
+      <div class="cat-card-bg">🧥</div>
+      <div class="cat-card-body">
+        <div class="cat-name">Jackets</div>
+        <div class="cat-count">Racing · Training · Retro</div>
+      </div>
+    </div>
+    <div class="cat-card" style="background: #0f0800;">
+      <div class="cat-card-bg">🕰️</div>
+      <div class="cat-card-body">
+        <div class="cat-name">Retro</div>
+        <div class="cat-count">Classic editions from past eras</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="products">
+  <div class="products-header">
+    <div>
+      <div class="section-eyebrow">New Arrivals</div>
+      <div class="section-title">Trending <span class="dim">Right Now</span></div>
+    </div>
+    <a href="#" class="view-all">View All Products →</a>
+  </div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img">
+        ⚽
+        <div class="product-badge badge-new">New</div>
+        <div class="product-quick">Quick Order →</div>
+      </div>
+      <div class="product-body">
+        <div class="product-sport">Football · EPL</div>
+        <div class="product-name">Arsenal Home<br>25/26 Season</div>
+        <div class="product-footer">
+          <div class="product-price">₹1,399 <span class="old">₹1,800</span></div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div><div class="size-dot">XL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background: #0f0000;">
+        🏎️
+        <div class="product-badge badge-hot">Hot</div>
+        <div class="product-quick">Quick Order →</div>
+      </div>
+      <div class="product-body">
+        <div class="product-sport">F1 · Ferrari</div>
+        <div class="product-name">Ferrari Racing<br>Team Jacket</div>
+        <div class="product-footer">
+          <div class="product-price">₹2,199</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div><div class="size-dot">XL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background: #00040f;">
+        🏀
+        <div class="product-badge badge-new">New</div>
+        <div class="product-quick">Quick Order →</div>
+      </div>
+      <div class="product-body">
+        <div class="product-sport">NBA · Lakers</div>
+        <div class="product-name">LeBron James<br>#23 Icon Edition</div>
+        <div class="product-footer">
+          <div class="product-price">₹1,499</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background: #020010;">
+        👕
+        <div class="product-badge badge-pre">Pre-Order</div>
+        <div class="product-quick">Quick Order →</div>
+      </div>
+      <div class="product-body">
+        <div class="product-sport">Football · La Liga</div>
+        <div class="product-name">Real Madrid<br>Away 25/26</div>
+        <div class="product-footer">
+          <div class="product-price">₹1,499 <span class="old">₹1,900</span></div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div><div class="size-dot">XL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        ⚽
+        <div class="product-badge badge-hot">Hot</div>
+        <div class="product-quick">Quick Order →</div>
+      </div>
+      <div class="product-body">
+        <div class="product-sport">Football · UCL</div>
+        <div class="product-name">Barcelona<br>Home Kit 25/26</div>
+        <div class="product-footer">
+          <div class="product-price">₹1,399</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div><div class="size-dot">XL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background: #060000;">
+        🏎️
+        <div class="product-badge badge-new">New</div>
+        <div class="product-quick">Quick Order →</div>
+      </div>
+      <div class="product-body">
+        <div class="product-sport">F1 · Red Bull</div>
+        <div class="product-name">Red Bull Racing<br>Verstappen Tee</div>
+        <div class="product-footer">
+          <div class="product-price">₹1,699</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background: #000800;">
+        👟
+        <div class="product-badge badge-pre">Pre-Order</div>
+        <div class="product-quick">Quick Order →</div>
+      </div>
+      <div class="product-body">
+        <div class="product-sport">Cleats · Nike</div>
+        <div class="product-name">Mercurial Vapor<br>16 Elite FG</div>
+        <div class="product-footer">
+          <div class="product-price">₹4,999</div>
+          <div class="product-sizes">
+            <div class="size-dot">7</div><div class="size-dot">8</div><div class="size-dot">9</div><div class="size-dot">10</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        🕰️
+        <div class="product-badge badge-new">Retro</div>
+        <div class="product-quick">Quick Order →</div>
+      </div>
+      <div class="product-body">
+        <div class="product-sport">Retro · Man Utd</div>
+        <div class="product-name">Treble Season<br>1998/99 Edition</div>
+        <div class="product-footer">
+          <div class="product-price">₹1,299</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRE-ORDER PROCESS -->
+<section class="prebooking" style="padding:80px;">
+  <div>
+    <div class="prebooking-tag">📋 How it Works</div>
+    <h2>Order in<br><span>3 Simple</span><br>Steps</h2>
+    <p class="prebooking-desc">We source directly from premium suppliers so you get the best quality at the best price. All it takes is a pre-booking deposit to lock your order in.</p>
+    <a href="#" class="btn-primary" style="display:inline-block;">Start Your Order →</a>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">Choose Your Product & Place Order</div>
+        <div class="step-desc">Pick your jersey, size, fan or player version, and add your custom name/number. Pay 50% advance online via UPI, card or net banking. Secure & instant confirmation.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">We Source & Ship to Our Warehouse</div>
+        <div class="step-desc">We batch your order with others and source from our trusted suppliers. Delivery to our warehouse takes 4–5 weeks. We'll keep you updated via WhatsApp and email.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">Pay Remaining & We Dispatch</div>
+        <div class="step-desc">Once your product arrives, we send you photos + a payment link for the remaining 50%. After payment, we dispatch same day with tracking link sent to you automatically.</div>
+      </div>
+    </div>
+    <div style="background: var(--lime-dim); border: 1px solid rgba(200,255,0,0.15); border-radius: 10px; padding: 16px 20px; margin-top: 8px;">
+      <div style="font-size: 13px; color: var(--lime); font-weight: 600; margin-bottom: 4px;">📦 Delivery Timeline</div>
+      <div style="font-size: 12px; color: var(--muted2); line-height: 1.6;">Minimum 4–5 weeks from order date. We'll send you WhatsApp updates at every stage. Pan India delivery via Shiprocket.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAMS -->
+<section class="teams">
+  <div class="teams-header">
+    <div>
+      <div class="section-eyebrow">All Teams</div>
+      <div class="section-title">Shop By <span class="dim">Team</span></div>
+    </div>
+    <a href="#" class="view-all">All Teams →</a>
+  </div>
+  <div class="team-grid">
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Real Madrid</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Barcelona</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Arsenal</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Man City</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Man United</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Liverpool</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">PSG</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Chelsea</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">🏎️</div><div class="team-name">Ferrari</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">🏎️</div><div class="team-name">Red Bull</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">🏎️</div><div class="team-name">Mercedes</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">🏀</div><div class="team-name">Lakers</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">🏀</div><div class="team-name">Bulls</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">🏀</div><div class="team-name">Warriors</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">🏀</div><div class="team-name">Celtics</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">India NT</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Brazil NT</div></a>
+    <a href="#" class="team-card"><div class="team-emoji">⚽</div><div class="team-name">Argentina NT</div></a>
+  </div>
+</section>
+
+<!-- WHY US + REVIEWS -->
+<div class="whyus">
+  <div class="whyus-left">
+    <div class="section-eyebrow">Why Offside</div>
+    <div class="section-title" style="margin-bottom:0;">Why 500+<br>Fans <span class="dim">Trust Us</span></div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">💎</div>
+        <div class="feature-title">Premium Quality</div>
+        <div class="feature-desc">Player & fan version both available. Same fabric standards as official merchandise.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🖨️</div>
+        <div class="feature-title">Custom Printing</div>
+        <div class="feature-desc">Name, number, badges — printed exactly as you want. Player version available.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💳</div>
+        <div class="feature-title">Secure Payments</div>
+        <div class="feature-desc">Pay via UPI, card, or net banking. 50% advance, rest after product arrives.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <div class="feature-title">Pan India Delivery</div>
+        <div class="feature-desc">We deliver everywhere in India with full tracking via Shiprocket couriers.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">WhatsApp Support</div>
+        <div class="feature-desc">Real support on WhatsApp. Not a bot — actual humans helping you with your order.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📸</div>
+        <div class="feature-title">Product Photos Shared</div>
+        <div class="feature-desc">Before dispatch we photograph your exact order and share it with you for approval.</div>
+      </div>
+    </div>
+  </div>
+  <div class="whyus-right">
+    <div class="section-eyebrow" style="margin-bottom:20px;">Customer Reviews</div>
+    <div class="section-title" style="margin-bottom:32px;">What Fans <span class="dim">Say</span></div>
+    <div class="testimonials">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Got my Mbappé Real Madrid jersey and the quality blew me away. The player version fits perfectly — took one size up like they suggested. 10/10 would order again."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">🧑</div>
+          <div>
+            <div class="testi-name">Rohan Mehta</div>
+            <div class="testi-city">Mumbai, Maharashtra</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"My Ferrari jacket came exactly as shown. They sent me a photo before dispatch which I really appreciated. Tracking was spot on. Will be ordering my McLaren one next."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">👩</div>
+          <div>
+            <div class="testi-name">Priya Sharma</div>
+            <div class="testi-city">Bangalore, Karnataka</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★☆</div>
+        <div class="testi-text">"Bulls #23 jersey with my name on the back — came out clean. Delivery took about 5 weeks which they told me upfront so no issues. Quality is legit."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">🧑</div>
+          <div>
+            <div class="testi-name">Arjun Singh</div>
+            <div class="testi-city">Delhi, NCR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTAGRAM -->
+<div class="insta-strip">
+  <h3>Follow Us on <span>Instagram</span></h3>
+  <div class="insta-handle">@offsidestore.in · Tag us in your photos for a chance to be featured</div>
+  <div class="insta-grid">
+    <div class="insta-post">⚽</div>
+    <div class="insta-post">🏎️</div>
+    <div class="insta-post">🏀</div>
+    <div class="insta-post">👕</div>
+    <div class="insta-post">👟</div>
+    <div class="insta-post">🧥</div>
+  </div>
+  <a href="#" class="btn-ghost" style="display:inline-block;">Follow @offsidestore.in</a>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="newsletter-left">
+    <h3>New Drops.<br>First Access.</h3>
+    <div class="newsletter-sub">Get new arrivals and exclusive pre-order alerts in your inbox.</div>
+  </div>
+  <div class="newsletter-form">
+    <input class="newsletter-input" type="email" placeholder="your@email.com">
+    <button class="newsletter-btn">Subscribe →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">Offside<span>.</span></div>
+      <div class="footer-tagline">Premium sports jerseys — Football, F1, NBA, Cleats and more. Delivered across India. Trusted by 500+ fans.</div>
+      <div class="social-links">
+        <a href="#" class="social-link">📸</a>
+        <a href="#" class="social-link">💬</a>
+        <a href="#" class="social-link">📘</a>
+        <a href="#" class="social-link">🐦</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <ul class="footer-links">
+        <li><a href="#">Football Jerseys</a></li>
+        <li><a href="#">F1 Collection</a></li>
+        <li><a href="#">NBA Jerseys</a></li>
+        <li><a href="#">Retro Editions</a></li>
+        <li><a href="#">Cleats</a></li>
+        <li><a href="#">Jackets</a></li>
+        <li><a href="#">New Arrivals</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Info</div>
+      <ul class="footer-links">
+        <li><a href="#">How to Order</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Return Policy</a></li>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">About Offside</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#">📱 WhatsApp Support</a></li>
+        <li><a href="#">📸 @offsidestore.in</a></li>
+        <li><a href="#">📧 hello@offsidestore.in</a></li>
+        <li style="margin-top:20px; color: var(--muted); font-size:12px; line-height:1.6;">Mon–Sat · 10am–8pm<br>Support response within 2 hrs</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Offside Store. All rights reserved. Made in India 🇮🇳</div>
+    <div class="footer-payments">
+      <span class="payment-pill">UPI</span>
+      <span class="payment-pill">Razorpay</span>
+      <span class="payment-pill">Visa</span>
+      <span class="payment-pill">Mastercard</span>
+      <span class="payment-pill">Net Banking</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="#" class="wa-float" title="WhatsApp Support">💬</a>
+
+<script>
+  // Custom cursor — desktop only
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+  if (isTouchDevice) {
+    cursor.style.display = 'none';
+    ring.style.display = 'none';
+    document.body.style.cursor = 'auto';
+    document.querySelectorAll('*').forEach(el => el.style.cursor = '');
+  } else {
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+  }
+
+  // Hover effects on cursor
+  document.querySelectorAll('a, button, .cat-card, .product-card, .team-card, .insta-post').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '16px';
+      cursor.style.height = '16px';
+      ring.style.width = '50px';
+      ring.style.height = '50px';
+      ring.style.opacity = '0.8';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '10px';
+      cursor.style.height = '10px';
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  // Intersection observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.product-card, .cat-card, .team-card, .testi-card, .feature').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, background 0.2s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
